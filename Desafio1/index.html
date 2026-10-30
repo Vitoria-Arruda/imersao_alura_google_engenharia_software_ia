@@ -1,0 +1,45 @@
+<!-- index.html: Estrutura da calculadora -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Calculadora Web</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator">
+    <div class="display">
+      <div id="previous" class="previous-op"></div>
+      <div id="current" class="current-op">0</div>
+      <div id="error" class="error-msg hidden"></div>
+    </div>
+    <div class="buttons">
+      <button onclick="clearAll()" class="btn-clear">AC</button>
+      <button onclick="deleteDigit()">⌫</button>
+      <button onclick="applyPercent()">%</button>
+      <button onclick="setOp('÷')" class="btn-op">÷</button>
+      
+      <button onclick="addNum('7')">7</button>
+      <button onclick="addNum('8')">8</button>
+      <button onclick="addNum('9')">9</button>
+      <button onclick="setOp('×')" class="btn-op">×</button>
+      
+      <button onclick="addNum('4')">4</button>
+      <button onclick="addNum('5')">5</button>
+      <button onclick="addNum('6')">6</button>
+      <button onclick="setOp('-')" class="btn-op">−</button>
+      
+      <button onclick="addNum('1')">1</button>
+      <button onclick="addNum('2')">2</button>
+      <button onclick="addNum('3')">3</button>
+      <button onclick="setOp('+')" class="btn-op">+</button>
+      
+      <button onclick="addNum('0')" class="btn-zero">0</button>
+      <button onclick="addDecimal()">,</button>
+      <button onclick="compute()" class="btn-equal">=</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
