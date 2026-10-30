@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Moderna</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Navegação de Abas -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" data-tab="pad-view">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect width="18" height="18" x="3" y="3" rx="2" />
+                    <line x1="8" x2="16" y1="12" y2="12" />
+                    <line x1="12" x2="12" y1="8" y2="16" />
+                </svg>
+                Calculadora
+            </button>
+            <button class="tab-btn" data-tab="percent-view">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="19" x2="5" y1="5" y2="19" />
+                    <circle cx="6.5" cy="6.5" r="2.5" />
+                    <circle cx="17.5" cy="17.5" r="2.5" />
+                </svg>
+                Porcentagem Direta
+            </button>
+            <button class="tab-btn" data-tab="history-view">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <polyline points="12 6 12 12 16 14" />
+                </svg>
+                Histórico
+            </button>
+        </nav>
+
+        <!-- Aba 1: Calculadora Completa -->
+        <main id="pad-view" class="tab-content active">
+            <div class="calculator-card">
+                <!-- Display -->
+                <header class="display-container">
+                    <div class="display-expression" id="display-expr" title="Expressão anterior"></div>
+                    <div class="display-main-row">
+                        <input type="text" id="display-input" class="display-input" value="0" placeholder="0"
+                            autocomplete="off" spellcheck="false" />
+                        <button id="btn-copy" class="btn-icon" title="Copiar resultado">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
+                                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="display-message" class="display-message"></div>
+                </header>
+
+                <!-- Teclado de Botões -->
+                <div class="keypad">
+                    <!-- Linha de Ações Auxiliares -->
+                    <button class="btn btn-action" data-action="clear-all" title="Limpar Tudo (Esc)">AC</button>
+                    <button class="btn btn-action" data-action="backspace" title="Apagar (Backspace)">⌫</button>
+                    <button class="btn btn-op" data-insert="(">(</button>
+                    <button class="btn btn-op" data-insert=")">)</button>
+
+                    <!-- Números e Operadores -->
+                    <button class="btn btn-op" data-insert="%">%</button>
+                    <button class="btn btn-op" data-insert="÷">÷</button>
+                    <button class="btn btn-op" data-insert="×">×</button>
+                    <button class="btn btn-op" data-insert="-">−</button>
+
+                    <button class="btn btn-num" data-insert="7">7</button>
+                    <button class="btn btn-num" data-insert="8">8</button>
+                    <button class="btn btn-num" data-insert="9">9</button>
+                    <button class="btn btn-op btn-op-accent" data-insert="+">+</button>
+
+                    <button class="btn btn-num" data-insert="4">4</button>
+                    <button class="btn btn-num" data-insert="5">5</button>
+                    <button class="btn btn-num" data-insert="6">6</button>
+                    <button class="btn btn-num" data-insert=",">,</button>
+
+                    <button class="btn btn-num" data-insert="1">1</button>
+                    <button class="btn btn-num" data-insert="2">2</button>
+                    <button class="btn btn-num" data-insert="3">3</button>
+                    <button class="btn btn-equals" data-action="calculate" title="Calcular (Enter)">=</button>
+
+                    <button class="btn btn-num btn-zero" data-insert="0">0</button>
+                    <button class="btn btn-num" data-insert="00">00</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Aba 2: Assistente de Porcentagem (Opção 5 do Python) -->
+        <section id="percent-view" class="tab-content">
+            <div class="calculator-card">
+                <div class="card-header">
+                    <h2>Cálculo Direto de Porcentagem</h2>
+                    <p class="subtitle">Calcula percentual, acréscimo e desconto instantaneamente.</p>
+                </div>
+
+                <form id="form-percentage" class="percent-form" onsubmit="return false;">
+                    <div class="input-group">
+                        <label for="percent-base">Valor Base (ex: 200)</label>
+                        <input type="number" step="any" id="percent-base" placeholder="Ex: 200" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="percent-rate">Taxa Percentual (%) (ex: 15)</label>
+                        <input type="number" step="any" id="percent-rate" placeholder="Ex: 15" required>
+                    </div>
+                </form>
+
+                <div class="percent-results" id="percent-results">
+                    <div class="result-tile">
+                        <span class="tile-label">Valor Percentual:</span>
+                        <span class="tile-val" id="res-percent-val">0.00</span>
+                        <span class="tile-desc" id="res-percent-desc">15% de 200</span>
+                    </div>
+
+                    <div class="result-tile highlight-green">
+                        <span class="tile-label">Com Acréscimo (+):</span>
+                        <span class="tile-val" id="res-percent-add">0.00</span>
+                        <span class="tile-desc">Valor Base + Percentual</span>
+                    </div>
+
+                    <div class="result-tile highlight-orange">
+                        <span class="tile-label">Com Desconto (-):</span>
+                        <span class="tile-val" id="res-percent-sub">0.00</span>
+                        <span class="tile-desc">Valor Base - Percentual</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aba 3: Histórico de Cálculos -->
+        <section id="history-view" class="tab-content">
+            <div class="calculator-card">
+                <div class="card-header history-header">
+                    <h2>Histórico Recente</h2>
+                    <button id="btn-clear-history" class="btn-text-danger">Limpar</button>
+                </div>
+                <div id="history-list" class="history-list">
+                    <div class="history-empty">Nenhum cálculo registrado ainda.</div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
